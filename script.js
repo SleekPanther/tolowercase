@@ -18,24 +18,38 @@ const copyButton = document.querySelector("#copyButton");
 pasteButton.addEventListener("click", () => {
 	console.log('paste click')
 	
-	navigator.clipboard
-	.readText()
-	.then((clipText) => {
-		input.value = clipText;
-		output.value = input.value?.toLowerCase();
-	})
-	.catch(err => console.error('Failed to paste.', err));
+	try{
+		navigator.clipboard
+		.readText()
+		.then((clipText) => {
+			input.value = clipText;
+			output.value = input.value?.toLowerCase();
+		})
+		.catch(err => console.error('Failed to paste.', err));
+	}
+	catch(e){
+		console.error('Failed to paste.', err);
+	}
 });
 
 copyButton.addEventListener("click", () => {
 	navigator.clipboard
 	.writeText(output.value)
-	.then(() => {
+	.then(
+		() => {
+			console.log("Wrote stuff to clipboard");
+		},
+		(err) => {
+			console.error('Failed to write to clipboard.', err);
+		}
+	  );
+
+	// .then(() => {
 	//   console.log("Wrote stuff to clipboard");
-	},
-	(err) => {
-	  console.error('Failed to write to clipboard.', err);
-	})
-	//unclear if this way of handling promise failure is better
-	.catch(err => console.error('Failed to write to clipboard.', err));
+	// },
+	// (err) => {
+	//   console.error('Failed to write to clipboard.', err);
+	// })
+	// //unclear if this way of handling promise failure is better
+	// .catch(err => console.error('Failed to write to clipboard.', err));
 });
