@@ -16,8 +16,6 @@ const copyButton = document.querySelector("#copyButton");
 
 //implemented as overwriting everything, handling prior cursor position seems out of scope
 pasteButton.addEventListener("click", () => {
-	console.log('paste click')
-	
 	try{
 		navigator.clipboard
 		.readText()
@@ -25,31 +23,28 @@ pasteButton.addEventListener("click", () => {
 			input.value = clipText;
 			output.value = input.value?.toLowerCase();
 		})
-		.catch(err => console.error('Failed to paste.', err));
+		.catch(err => console.error('Failed to paste. Promise catch', err));
 	}
-	catch(e){
-		console.error('Failed to paste.', err);
+	catch(err){
+		console.error('Failed to paste. Likely missing certificate', err);
 	}
 });
 
 copyButton.addEventListener("click", () => {
-	navigator.clipboard
-	.writeText(output.value)
-	.then(
-		() => {
-			console.log("Wrote stuff to clipboard");
-		},
-		(err) => {
-			console.error('Failed to write to clipboard.', err);
-		}
-	  );
-
-	// .then(() => {
-	//   console.log("Wrote stuff to clipboard");
-	// },
-	// (err) => {
-	//   console.error('Failed to write to clipboard.', err);
-	// })
-	// //unclear if this way of handling promise failure is better
-	// .catch(err => console.error('Failed to write to clipboard.', err));
+	try{
+		navigator.clipboard
+		.writeText(output.value)
+		.then(
+			() => {
+				// console.log("Wrote stuff to clipboard");
+			},
+			(err) => {
+				console.error('Failed to write to clipboard, inner catch. Likely missing certificate', err);
+			}
+		)
+		.catch(err => console.error('Failed to write to clipboard. Promise catch.', err));
+	}
+	catch(err){
+		console.error('Failed to copy. Likely missing certificate', err);
+	}
 });
