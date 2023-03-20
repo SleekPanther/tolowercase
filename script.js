@@ -23,10 +23,10 @@ pasteButton.addEventListener("click", () => {
 			input.value = clipText;
 			output.value = input.value?.toLowerCase();
 		})
-		.catch(err => console.error('Failed to paste. Promise catch', err));
+		.catch(err => console.error('Failed to paste. Promise catch.\n', err));
 	}
 	catch(err){
-		console.error('Failed to paste. Likely missing certificate', err);
+		console.error('Failed to paste. Likely missing certificate.\n', err);
 	}
 });
 
@@ -42,9 +42,9 @@ copyButton.addEventListener("click", () => {
 				console.error('Failed to write to clipboard, inner catch. Likely missing certificate', err);
 			}
 		)
-		.catch(err => console.error('Failed to write to clipboard. Promise catch.', err));
+		.catch(err => console.error('Failed to write to clipboard. Promise catch.\n', err));
 	}
 	catch(err){
-		console.error('Failed to copy. Likely missing certificate', err);
+		console.error('Failed to copy. Likely missing certificate.\n', err);
 	}
 });
