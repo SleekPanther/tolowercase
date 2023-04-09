@@ -5,6 +5,9 @@
 - example.com     (no www.prefix)
 - recommend to set up www. as well
 
+https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Choosing_between_www_and_non-www_URLs
+MDN recommends choosing 1, canonical name = official
+
 added domain
 should auto secure www version
 need CNAME to fix dns
@@ -82,3 +85,6 @@ justify-self: end;
 disabled SSL on Sav temporarily
 3/21/23
 re enabled SSL on Sav
+
+4/9/23
+finally certificate works after weeks of nothing
